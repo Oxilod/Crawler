@@ -73,6 +73,8 @@ public class Selector{
             String brandName = null;
             String price = null;
             String[] tyreWidthCross;
+            String[] csvWriter;
+
             int attempts = 0;
             Thread.sleep(400);
             while(attempts<4){ // I did this to treat a case that was frequently appearing, throwing a Stale element error.
@@ -91,11 +93,17 @@ public class Selector{
                 tyreWidthCross = splitStr[0].toUpperCase().split("X");
             }else if (splitStr[0].length() <= 3){
                 tyreWidthCross = splitStr[0].split(" ");
-                tyreWidthCross[1] = "no value";
+
             }else {
                 tyreWidthCross = splitStr[0].split("/");
             }
-            String[] csvWriter = {tyreWidthCross[0],tyreWidthCross[1], splitStr[1], splitStr[2],brandName, price}; // Make a string of the content that has to be written to the file
+            if (tyreWidthCross.length < 2) {
+                csvWriter = new String[]{tyreWidthCross[0], "no value", splitStr[1], splitStr[2], brandName, price}; // Make a string of the content that has to be written to the file
+            }else {
+                csvWriter = new String[]{tyreWidthCross[0], tyreWidthCross[1], splitStr[1], splitStr[2], brandName, price}; // Make a string of the content that has to be written to the file
+
+            }
+
             csvWrote.writeNext(csvWriter); // Wirte to the CSV file
             csvWrote.flush();
         }
