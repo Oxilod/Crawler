@@ -200,6 +200,7 @@ public class Selector{
                     tyreDiameterSelector.selectByIndex(k);// Select the option based on the iteration.
                     csvFileCreator();
                     k++;
+                    Thread.sleep(500);
                     driver.navigate().back();
                     driver.navigate().back();
                     Thread.sleep(500);
@@ -218,7 +219,7 @@ public class Selector{
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         int tyreWidthSize = new Select(findElement(By.id("drpTyreWidthSB"))).getOptions().size();
         while (i < tyreWidthSize){
-            Thread.sleep(1000);
+            Thread.sleep(500);
             Select tyreWidthSelector = new Select(findElement(By.id("drpTyreWidthSB")));
             tyreWidthSelector.selectByIndex(i); // Select the option based on the iteration.
             Thread.sleep(500);
@@ -238,7 +239,6 @@ public class Selector{
                     Thread.sleep(500);
                     driver.navigate().back();
                     driver.navigate().back();
-                    Thread.sleep(500);
                     tyreSelector(i,j,k);
                 }
                 j++;
