@@ -229,7 +229,9 @@ public class Selector{
                 Select tyreDiameterSelector = new Select(findElement(By.id("drpTyreDiameterSB")));
                 while (k < tyreDiameterSelector.getOptions().size()){
                     Thread.sleep(1000);
-                    tyreDiameterSelector.selectByIndex(k);// Select the option based on the iteration.
+                    if (k <= tyreDiameterSelector.getOptions().size()-1){
+                        tyreDiameterSelector.selectByIndex(k);// Select the option based on the iteration.
+                    }
                     Thread.sleep(500);
                     csvFileCreator();
                     k++;
