@@ -139,21 +139,20 @@ class Selector{
         return finder;
     }
     private void selectIndex(Select selector, int index) throws InterruptedException {
-        boolean notSelected = true;
         Thread.sleep(500);
-        while (notSelected){
             try {
-                selector.selectByIndex(index);
-                notSelected = false;
+                int attempts = 0;
+                while (attempts <= 4){
+                    selector.selectByIndex(index);
+                    attempts++;
+                }
             }catch (StaleElementReferenceException e){
                 System.out.println("Stale element select Index");
-            }catch (Exception e){
+            }catch(Exception e){
                 System.out.println("Select Index Error");
                 e.printStackTrace();
-                System.exit(1);
             }
         }
-    }
 
     private int getOptionsSize(Select selector) throws InterruptedException { // I've created this method to treat the Stale element issue that was appearing.
         int counter = 0;
@@ -175,6 +174,7 @@ class Selector{
         Select tyreWidthSelector = new Select(findElement(By.id("drpTyreWidthSB")));
         while (i < getOptionsSize(tyreWidthSelector)) {
             selectIndex(tyreWidthSelector, i);
+            Thread.sleep(100);
             Select crossSectionSelector = new Select(findElement(By.id("drpTyreCrossSectionSB")));
             int crossSectionSize = getOptionsSize(crossSectionSelector);
             while (j < crossSectionSize) {
@@ -195,6 +195,5 @@ class Selector{
             i++;
             tyreSelectorByIndex(i,0,0);
         }
-        driver.close();
     }
 }
