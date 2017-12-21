@@ -11,8 +11,8 @@ public class Exec{
         File file = new File("");
         System.setProperty("webdriver.chrome.driver", file.getAbsolutePath() + "/Resources/chromedriver");
         Selector selector = new Selector();
-        selector.navigate();
-        selector.tyreSelector();
+        selector.goToURL();
+        selector.tyreSelectorByIndex(0,0,0);
         Thread.sleep(5000);
     }
 }
